@@ -21,3 +21,9 @@ public:
         return longest;
     }
 };
+//  a        b     b        a       
+//  start,i                      seen[a]=1  longest=1
+//  start    i                   seen[b]=2   longest=2
+//                 i,start             
+//                          i     line 14 will tell start to remain where it is bcos seen[s[i]] ie seen[a] here points to s[1] which is less than the start current pos  
+//  output longest = 2                            
