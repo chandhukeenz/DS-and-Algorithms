@@ -31,4 +31,4 @@ public:
 //-4 -3 -6 -2 1 -1
 //now traverse through the array and mark the entry of the each number in its corrs index by making the value at that index negative
 //at one point when u chk a number to be already negative that means the number is repeated
-//now by again traversing the array we can find the missing value as the index whose value remains positive 
+//now by again traversing the array we can find the missing value that will be the index whose value remains positive 
