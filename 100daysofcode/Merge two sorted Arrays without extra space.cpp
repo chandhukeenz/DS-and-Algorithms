@@ -19,13 +19,9 @@ void merge(int arr1[], int arr2[], int n, int m)
     int i=0,j=i+gap,temp;
     while(gap>=1){
         while(j<n+m){
-            if(i<n&&j<n&&(arr1[i]>arr1[j])){
-               temp =arr1[j];arr1[j]=arr1[i];arr1[i]=temp;
-            }else if(i<n&&j>=n&&(arr1[i]>arr2[j-n])){
-                temp =arr2[j-n];arr2[j-n]=arr1[i];arr1[i]=temp;
-            }else if(i>=n&&j>=n&& (arr2[i-n]>arr2[j-n])){
-                temp =arr2[j-n];arr2[j-n]=arr2[i-n];arr2[i-n]=temp;
-            }
+            if(i<n&&j<n&&(arr1[i]>arr1[j])) swap(arr[i],arr[j]);
+            else if(i<n&&j>=n&&(arr1[i]>arr2[j-n])) swap(arr1[i],arr2[j-n]);
+            else if(i>=n&&j>=n&& (arr2[i-n]>arr2[j-n])) swap(arr2[i-n],arr2[j-n]);
             i++;j++;
         }
         gap=gap/2;
