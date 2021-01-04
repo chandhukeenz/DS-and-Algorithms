@@ -3,7 +3,8 @@ Write a function findFirstLoopNode() that checks whether a given Linked List con
 If the loop is present then it returns point to the first node of the loop. Else it returns NULL.
 input: 1->2->3->4
           |      |
-    	  7<- 6<-5
+          v      v
+    	7<- 6<-5
 output: 2
 */
 #include<iostream>
@@ -54,3 +55,6 @@ int main(){
  
     return 0;
 }
+//slow and fast pointer by 1 and 2 steps
+//wen it collides, again start from head and move both slow and fast by 1
+//the colliding point is the first node of loop
