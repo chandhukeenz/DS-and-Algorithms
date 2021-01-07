@@ -26,3 +26,8 @@ public:
         return l1;
     }
 };
+//move both the l1 and l2 along the 2 lists
+//whenever l1 or l2 reaches null,make it point to the head of the other list
+//this makes the pointer l1 and l2 to align itself by equal pos wrt both lists before intersection in the 
+//second iteraton
+//so now wen we mov l1 and l2 by 1 , the point at which it collides is the intersection point 
