@@ -29,3 +29,7 @@ public:
         return a;
     }
 };
+//calculate the diff of target and the number
+//check if the diff exists in the map, 
+//if it does-> return the pair
+//else add the number and move on with the process
