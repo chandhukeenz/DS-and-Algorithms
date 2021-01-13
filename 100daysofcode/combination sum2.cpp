@@ -30,7 +30,7 @@ class Solution {
 public:
     vector<vector<int> > combinationSum2(vector<int> &candidates, int target){
         sort(candidates.begin(), candidates.end());
-        vector<std::vector<int>> result;
+        vector<vector<int>> result;
         vector<int> combination;
         combinationSum2(candidates, target, result, combination, 0);
         return result;
