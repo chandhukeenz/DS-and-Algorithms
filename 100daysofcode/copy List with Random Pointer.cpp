@@ -27,8 +27,12 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        Node *iter = head; 
+          Node *iter = head; 
           Node *front = head;
+        //create the deep copy of the list by assigning the next position of all original list nodes
+        //        1'(copy)
+        //      /        \
+        // 1 (iter) -> 2(front) -> 3 ...
           while (iter != NULL) {
             front = iter->next;
             Node *copy = new Node(iter->val);
@@ -37,15 +41,18 @@ public:
             iter = front;
           }
           iter = head;
+        //create the random pointer for the deep copy list
+        //move iter by 2 inorder to not enter the deep copy of the list
           while (iter != NULL) {
-            if (iter->random != NULL) {
-              iter->next->random = iter->random->next;
-            }
+            if (iter->random != NULL) iter->next->random = iter->random->next;
             iter = iter->next->next;
           }
           iter = head;
           Node *pseudoHead = new Node(0);
           Node *copy = pseudoHead;
+        //separate the deep copy list and original list
+        //front leads iter by 1 in the original list
+        //copy moves in the deep copy list
           while (iter != NULL) {
             front = iter->next->next;
             copy->next = iter->next;
