@@ -42,8 +42,6 @@ struct Node{
 	    next = NULL;
 	    bottom = NULL;
 	}
-	
-};
 */
 
 /*  Function which returns the  root of 
@@ -67,12 +65,15 @@ Node* mergeTwoLists(Node* a, Node* b) {
     else temp->bottom = b; 
     return res -> bottom;
 }
-Node *flatten(Node *root)
-{
+Node *flatten(Node *root){
         if (root == NULL || root->next == NULL) 
             return root; 
         root->next = flatten(root->next); 
         root = mergeTwoLists(root, root->next); 
         return root; 
 }
-
+/*
+1.)make a recursive function to call flatten with root->next
+2.)this recursive function base case is the last root->next=NULL.and we are calling merge function.
+3.)that means, we are sorting and merging from last to first.
+4.)merge function compares two consecutive root nodes to sort and merge them.
