@@ -12,8 +12,8 @@ class queue{
 };
 
 bool queue::enqueue(int x){
-    if(size>capacity){
-        cout<<"Queue Overflow";
+    if(size>=capacity){
+        cout<<"Queue Overflow"<<endl;
         return false;
     }else{
         rear=(rear+1)%capacity;
@@ -51,7 +51,7 @@ bool queue::isempty(){
 }
 
 int main(){
-    class queue q(3);
+    class queue q(2);
     q.enqueue(10);
     q.enqueue(20);
     q.enqueue(30);
