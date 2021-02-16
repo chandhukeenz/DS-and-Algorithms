@@ -1,6 +1,7 @@
 #include<iostream>
 #include<queue>
 #include<unordered_map>
+#include<algorithm>
 using namespace std;
 
 struct Node{
@@ -77,7 +78,7 @@ void levelorderLbyL(struct Node *root,queue<struct Node*>q,int c){
     if(q.empty()||c==2) return;
     if(root==NULL){
         c++;
-        cout<<'\n';
+        if(c!=2) cout<<'\n';
         q.push(NULL);
     }else{
         c=0;
@@ -87,6 +88,36 @@ void levelorderLbyL(struct Node *root,queue<struct Node*>q,int c){
     }
     q.pop();
     levelorderLbyL(q.front(),q,c);
+}
+
+//Print the tree in the vertical order
+int cmp(pair<int,vector<int>> a,pair<int,vector<int>>b){
+    return a.first<b.first;
+}
+
+void verticalorder(struct Node *root, queue<pair<struct Node*,int>>q, int v, unordered_map<int,vector<int>>m){
+    if(q.empty()){
+        vector<pair<int,vector<int>>>x(m.begin(),m.end());
+        sort(x.begin(),x.end(),cmp);
+        for(int i=0;i<x.size();i++){
+            for(int j=0;j<x[i].second.size();j++){
+                cout<<x[i].second[j]<<" ";
+            }
+        }
+        cout<<endl;
+        return;
+    }
+    if(q.empty() || root==NULL)return;
+    if(root->left){
+        q.push(make_pair(root->left,v-1));
+        m[v-1].push_back(root->left->data);
+    }
+    if(root->right){
+        q.push(make_pair(root->right,v+1));
+        m[v+1].push_back(root->right->data);
+    }
+    q.pop();
+    verticalorder(q.front().first, q, q.front().second, m);
 }
 
 int main(){
@@ -109,13 +140,12 @@ int main(){
     cout<<"\nlevelorder printed level by level:"<<endl;
     q2.push(root);q2.push(NULL);
     levelorderLbyL(root,q2,countNull);
-    /*cout<<"\nVertical order:"<<endl;
+    cout<<"Vertical order:"<<endl;
     q3.push(make_pair(root,0));
     int vLevel=0;
     unordered_map<int,vector<int>>m;
     m[vLevel].push_back(root->data);
     verticalorder(root,q3,vLevel,m);
-    */
     int number;
     cout<<"Enter the number to be searched:";
     cin>>number;
