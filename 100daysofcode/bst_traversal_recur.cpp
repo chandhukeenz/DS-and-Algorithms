@@ -39,6 +39,7 @@ bool search(struct Node* root,int data){
     else return search(root->right,data);
 }
 
+//depth first
 //ROOT - LEFT - RIGHT
 void preorder(struct Node *root){
     if(root==NULL) return;
@@ -63,6 +64,7 @@ void postorder(struct Node *root){
     cout<<root->data<<" ";
 }
 
+//breadth first
 //Print the tree in the level order in a single line
 void levelorderInaLine(struct Node *root,queue<struct Node*>q){
     if(q.empty() || root==NULL) return;
@@ -132,7 +134,7 @@ int main(){
     preorder(root);
     cout<<"\ninorder:"<<endl;
     inorder(root);
-    cout<<"postorder:"<<endl;
+    cout<<"\npostorder:"<<endl;
     postorder(root);
     cout<<"\nlevelorder in a single Line:"<<endl;
     q1.push(root);
