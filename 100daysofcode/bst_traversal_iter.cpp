@@ -116,6 +116,28 @@ struct Node* deleteNode(struct Node* root,int val){
     return root;
 }
 
+//find height of the tree
+int height(struct Node* root){
+    if(root==NULL)return 0;
+    int h;
+    int left=height(root->left);
+    int right=height(root->right);
+    if(left>right) h=left+1;
+    else h=1+right;
+    return h;
+}
+
+//find the diameter of the tree
+int diameter(struct Node* root){
+    if(root==NULL)return 0;
+    int lh=height(root->left);
+    int rh=height(root->right);
+    int ld=diameter(root->left);
+    int rd=diameter(root->right);
+    int d=max(lh+rh+1,max(ld,rd));
+    return d;
+}
+
 int main(){
     struct Node *root=NULL;
     stack<struct Node*>s1;
@@ -129,6 +151,9 @@ int main(){
     inorder(root,s1);
     cout<<"\npreorder:"<<endl;
     preorder(root,s1);
+    cout<<"\nDiameter of the tree: ";
+    int d=diameter(root);
+    cout<<d<<endl;
     cout<<"\nenter the value to be deleted:"<<endl;
     cin>>n;
     root=deleteNode(root,n);
