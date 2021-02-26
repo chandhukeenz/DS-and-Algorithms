@@ -138,6 +138,13 @@ int diameter(struct Node* root){
     return d;
 }
 
+void deletetree(struct Node *root){
+    if(root==NULL) return;
+    deletetree(root->left);
+    deletetree(root->right);
+    free(root);
+}
+
 int main(){
     struct Node *root=NULL;
     stack<struct Node*>s1;
@@ -159,5 +166,6 @@ int main(){
     root=deleteNode(root,n);
     cout<<"After deleting..inorder traversal:"<<endl;
     inorder(root,s1);
+    deletetree(root);
     return 0;
 }
