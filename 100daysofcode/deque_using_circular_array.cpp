@@ -32,7 +32,7 @@ struct deque{
     }
     void rInsert(int val){
         if(isfull()){
-            cout<<"\nOverflow!!";
+            cout<<"\nOverflow!!"<<endl;
             return;
         }
         if(front==-1)
@@ -44,7 +44,7 @@ struct deque{
     }
     void fDelete(){
         if(isempty()){
-            cout<<"\nUnderflow!!";
+            cout<<"\nUnderflow!!"<<endl;
             return;
         }
         if(front==rear)
@@ -55,7 +55,7 @@ struct deque{
     }
     void rDelete(){
         if(isempty()){
-            cout<<"\nUnderflow!!";
+            cout<<"\nUnderflow!!"<<endl;
             return;
         }
         if(front==rear)
@@ -66,14 +66,14 @@ struct deque{
     }
     int fGet(){
         if(isempty()){
-            cout<<"\nUnderflow!!";
+            cout<<"\nUnderflow!!"<<endl;
             return -1;
         }
         return a[front];
     }
     int rGet(){
         if(isempty()||rear<0){
-            cout<<"\nUnderflow!!";
+            cout<<"\nUnderflow!!"<<endl;
             return -1;
         }
         return a[rear];
@@ -83,12 +83,14 @@ struct deque{
 int main(){
     deque d(5);
     d.rInsert(1);d.rInsert(2);
-    cout<<d.rGet()<<endl;
+    d.rInsert(3);d.rInsert(4);
+    d.rInsert(5);d.rInsert(6);
+    cout<<"Element in rear:"<<d.rGet()<<endl;
     d.rDelete();
-    cout<<d.rGet()<<endl;
+    cout<<"Element in rear after rear deletion:"<<d.rGet()<<endl;
     d.fInsert(3);
-    cout<<d.fGet()<<endl;
+    cout<<"Element in front after insertion at front:"<<d.fGet()<<endl;
     d.fDelete();
-    cout<<d.fGet()<<endl;
+    cout<<"Element in front after front deletion:"<<d.fGet()<<endl;
     return 0;
 }
