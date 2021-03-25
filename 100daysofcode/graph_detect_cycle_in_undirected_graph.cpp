@@ -37,13 +37,11 @@ public:
         return false;
     }
 	bool isCycle(int V, vector<int>adj[]){
-	    int parent=-1;
 	    vector<bool>visited(V);
 	    bool initial =false;
 	    fill(visited.begin(),visited.end(),initial);
 	    for(int node=0;node<V;node++){
-	        if(!visited[node])
-	            if(isCyclicUtil(node,visited,-1,adj))
+	        if(!visited[node] && isCyclicUtil(node,visited,-1,adj))
 	                 return true;
 	    }
 	    return false;
