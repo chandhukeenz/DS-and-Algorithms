@@ -37,9 +37,7 @@ public:
         return false;
     }
 	bool isCycle(int V, vector<int>adj[]){
-	    vector<bool>visited(V);
-	    bool initial =false;
-	    fill(visited.begin(),visited.end(),initial);
+	    vector<bool>visited(V,false);
 	    for(int node=0;node<V;node++){
 	        if(!visited[node] && isCyclicUtil(node,visited,-1,adj))
 	                 return true;
