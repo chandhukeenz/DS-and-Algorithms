@@ -7,6 +7,70 @@ You don’t need to read input or print anything. Your task is to complete the f
 Expected Time Complexity: O(V + E)
 Expected Auxiliary Space: O(V)
 */
+
+//using colors O(V+E) TC 
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+class Solution {
+public:
+    enum Color {WHITE, GRAY, BLACK};
+	bool isCyclicUtil(int u,int *color,vector<int>adj[]){
+        color[u]=GRAY;
+        vector<int>::iterator i;
+        int v;
+        for(i=adj[u].begin();i!=adj[u].end();i++){
+            v=*i;
+            if(color[v]==GRAY) return true;
+            if(color[v]==WHITE && isCyclicUtil(v,color,adj)) return true;
+        }
+        color[u]=BLACK;
+        return false;
+    }
+	bool isCyclic(int V, vector<int>adj[]){
+	    int *color=new int[V];
+	    for(int i=0;i<V;i++) color[i]=WHITE;
+	    for(int i=0;i<V;i++){
+	        if(color[i]==WHITE && isCyclicUtil(i,color,adj))
+	              return true;
+	    }
+	    return false;
+	}
+};
+
+// { Driver Code Starts.
+
+
+int main()
+{
+    
+    int t;
+    cin >> t;
+    while(t--)
+    {
+    	int V, E;
+    	cin >> V >> E;
+
+    	vector<int> adj[V];
+
+    	for(int i = 0; i < E; i++)
+    	{
+    		int u, v;
+    		cin >> u >> v;
+    		adj[u].push_back(v);
+    	}
+
+    	Solution obj;
+    	cout << obj.isCyclic(V, adj) << "\n";
+    }
+
+    return 0;
+}
+
+  // } Driver Code Ends
+  //.........................................................
 //backtracking
 class Solution {
 public:
