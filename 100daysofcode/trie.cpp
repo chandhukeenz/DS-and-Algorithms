@@ -2,17 +2,17 @@
 using namespace std;
 
 struct trienode{
-    char data;
-    trienode *child[26];
-    int wc;//word count
-    int we; //word end
+    char data; //trienode key 
+    trienode *child[26]; //trienode pointer array
+    int we; //wordend
+    string wtype; //dictionary word type
+    string meaning; //dictionary word meaning
 };
 
-trienode nodepool[100000];
+trienode nodepool[100];
 trienode *root;
 int poolcount;
 
-//initial node
 void init(){
     poolcount=0;
     root=&nodepool[poolcount++];
@@ -28,55 +28,96 @@ struct trienode* getnewnode(char data){
     for(int i=0;i<26;i++){
         newnode->child[i]=NULL;
     }
-    newnode->wc=0;
     newnode->we=0;
     return newnode;
 }
 
-void insert(char *str){
+void insert(string &str,const string &wtype,const string &meaning){
     trienode *curr=root;
     int index;
     for(int i=0;str[i]!='\0';i++){
-        index=str[i]-'a';
+        index=tolower(str[i])-'a';
         if(curr->child[index]==NULL)
            curr->child[index]=getnewnode(str[i]);
-        curr->child[index]->wc ++;
         curr=curr->child[index];
     }
     curr->we++;
+    curr->wtype=wtype;
+    curr->meaning=meaning;
 }
 
-bool search(char *str){
+bool search(string &str,int del=0){
+    cout<<"word: "<<str<<endl;
     trienode *curr=root;
     int index;
-    for(int i=0;str[i]!='\0';i++){
+    for(int i=0;i<str.length();i++){
         index=str[i]-'a';
-        if(curr->child[index]==NULL)
-           return false;
-        else if(curr->child[index]->we==1)
-           return true;
+        if(curr->child[index]==NULL){
+            if(del==0){
+                cout<<"word present: ";
+            }
+            return false;
+        }
+        else if(curr->child[index]->we ==1 && i==(str.length()-1)){
+            if(del==1){
+                curr->child[index]->we=0;
+            }else{
+                cout<<"type: ";
+                cout<<curr->child[index]->wtype<<endl;
+                cout<<"meaning: ";
+                cout<<curr->child[index]->meaning<<endl;
+                cout<<"word present: ";
+            }
+            return true;
+        }
         curr=curr->child[index];
+    }
+    if(del==0){
+        cout<<"word present: ";
     }
     return false;
 }
 
+void delword(string str){
+    if(search(str,1)){
+        cout<<str<<" is successfully deleted"<<endl;
+    }else{
+        cout<<"no such word as "<<str<<" is present"<<endl;
+    }
+}
+
 int main(){
     init();
-    char a[5] = {'a','r','m','y'};
-    char b[5] = {'a','r','m'};
-    char c[5] = {'a','r','m','s'};
-    char d[5] = {'a','r','y'};
-    char e[5] = {'a','m','y'};
-    char f[5] = {'a','p','i'};
-    char g[5] ={'a','r'};
-    insert(a);
-    insert(b);
-    insert(c);
-    insert(d);
-    insert(e);
+    string a = "abandon";
+    string b = "abase";
+    string c = "aberration";
+    string d = "baulk";
+    string e = "bawdy";
+    string f = "beacon";
+    string g = "bedlam";
+    insert(a,"verb","To give up completely, leave permanently, lack of inhibition.");
+    insert(b,"verb","To humiliate or degrade");
+    insert(c,"noun","Deviation from what is normal or acceptable");
+    insert(d,"verb","Hesitate to accept, thwart or hinder");
+    insert(e,"adjective","Indecent, obscene");
+    cout<<".................................."<<endl;
+    cout<<search(a)<<endl;
+    cout<<".................................."<<endl;
     cout<<search(b)<<endl;
-    cout<<search(d)<<endl;
-    cout<<search(f)<<endl;
+    cout<<".................................."<<endl;
     cout<<search(g)<<endl;
+    cout<<".................................."<<endl;
+    cout<<search(c)<<endl;
+    cout<<".................................."<<endl;
+    delword(a);
+    cout<<".................................."<<endl;
+    delword(c);
+    cout<<".................................."<<endl;
+    cout<<search(a)<<endl;
+    cout<<".................................."<<endl;
+    cout<<search(c)<<endl;
+    cout<<".................................."<<endl;
+    cout<<search(b)<<endl;
+    cout<<".................................."<<endl;
     return 0;
 }
