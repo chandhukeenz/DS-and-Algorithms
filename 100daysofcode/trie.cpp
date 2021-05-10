@@ -8,7 +8,7 @@ struct trienode{
     string wtype; //dictionary word type
     string meaning; //dictionary word meaning
 };
-
+//ar(1)my(1)   ar(1)  
 trienode nodepool[100];
 trienode *root;
 int poolcount;
@@ -32,7 +32,9 @@ struct trienode* getnewnode(char data){
     return newnode;
 }
 
-void insert(string &str,const string &wtype,const string &meaning){
+void insert(string &str,
+            const string &wtype,
+            const string &meaning){
     trienode *curr=root;
     int index;
     for(int i=0;str[i]!='\0';i++){
@@ -45,6 +47,7 @@ void insert(string &str,const string &wtype,const string &meaning){
     curr->wtype=wtype;
     curr->meaning=meaning;
 }
+
 
 bool search(string &str,int del=0){
     cout<<"word: "<<str<<endl;
@@ -72,9 +75,7 @@ bool search(string &str,int del=0){
         }
         curr=curr->child[index];
     }
-    if(del==0){
-        cout<<"word present: ";
-    }
+    if(del==0){cout<<"word present: ";}
     return false;
 }
 
