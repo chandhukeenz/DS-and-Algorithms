@@ -8,7 +8,7 @@ struct trienode{
     string wtype; //dictionary word type
     string meaning; //dictionary word meaning
 };
-//ar(1)my(1)   ar(1)  
+
 trienode nodepool[100];
 trienode *root;
 int poolcount;
