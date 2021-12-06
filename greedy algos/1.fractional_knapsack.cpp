@@ -49,7 +49,7 @@ class Solution
         double r2 = (double) b.value / (double) b.weight;
         return r1 > r2;
     }
-    
+
     double fractionalKnapsack(int W, Item arr[], int n)
     {
         sort(arr,arr+n,cmp);
